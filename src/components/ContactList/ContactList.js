@@ -34,32 +34,8 @@ const ContactList = ({ contacts, onDeleteContact }) => {
         </tbody>
       ))}
     </Table>
-    // <ul className={style.list}>
-    //   {contacts.map(({ id, name, number }) => (
-    //     <li className={style.item} key={id}>
-    //       {name}: {number}
-    //       <button
-    //         className={style.button}
-    //         type="button"
-    //         onClick={() => {
-    //           onDeleteContact(id);
-    //         }}
-    //       >
-    //         Delete
-    //       </button>
-    //     </li>
-    //   ))}
-    // </ul>
   );
 };
-
-// const getVisibleContacts = (allContacts, filter) => {
-//   const normalFilter = filter.toLowerCase();
-
-//   return allContacts.filter(({ name }) =>
-//     name.toLowerCase().includes(normalFilter),
-//   );
-// };
 
 const mapStateToProps = state => ({
   contacts: selectors.getVisibleContacts(state),
