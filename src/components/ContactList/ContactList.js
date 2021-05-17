@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Table, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { operations, selectors } from '../../redux/Phone';
+import { Table, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 export default function ContactList() {
   const contacts = useSelector(selectors.getVisibleContacts);
@@ -22,8 +22,8 @@ export default function ContactList() {
         </tr>
       </thead>
       {contacts.map(({ id, name, number }) => (
-        <tbody>
-          <tr>
+        <tbody key={id}>
+          <tr >
             <td>{name}</td>
             <td>{number}</td>
             <td>
@@ -44,18 +44,7 @@ export default function ContactList() {
   );
 }
 
-// const mapStateToProps = state => ({
-//   contacts: selectors.getVisibleContacts(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   onDeleteContact: id => dispatch(operations.deleteContact(id)),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
-
 ContactList.propTypes = {
-  onDeleteContact: PropTypes.func,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

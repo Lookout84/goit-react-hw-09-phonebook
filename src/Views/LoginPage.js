@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/Auth';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
@@ -7,7 +7,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const handleChange = useCallback(e => {
     const { name, value } = e.target;
@@ -34,7 +34,6 @@ export default function LoginPage() {
         return;
       }
       dispatch(authOperations.logIn({ email, password }));
-
       setEmail('');
       setPassword('');
     },
@@ -84,31 +83,3 @@ export default function LoginPage() {
     </div>
   );
 }
-// }
-//   state = {
-//     email: '',
-//     password: '',
-//   };
-
-// handleChange = ({ target: { name, value } }) => {
-//   this.setState({ [name]: value });
-// };
-
-//   handleSubmit = e => {
-//     e.preventDefault();
-
-//     this.props.onLogin(this.state);
-
-//     this.setState({ name: '', email: '', password: '' });
-//   };
-
-//   render() {
-//     const { email, password } = this.state;
-
-// }
-
-// const mapDispatchToProps = {
-//   onLogin: authOperations.logIn,
-// };
-
-// export default connect(null, mapDispatchToProps)(LoginPage);

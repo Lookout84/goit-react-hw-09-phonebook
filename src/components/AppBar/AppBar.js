@@ -23,5 +23,5 @@ export default function AppBar() {
 }
 
 AppBar.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool,
 };
