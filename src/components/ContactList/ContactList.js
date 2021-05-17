@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { operations, selectors } from '../../redux/Phone';
 
-const ContactList = ({ contacts, onDeleteContact }) => {
+export default function ContactList() {
+  const contacts = useSelector(selectors.getVisibleContacts);
+
+  const dispatch = useDispatch();
+  const onDeleteContact = id => {
+    dispatch(operations.deleteContact(id));
+  };
+
   return (
     <Table striped bordered hover size="sm">
       <thead>
@@ -35,19 +42,25 @@ const ContactList = ({ contacts, onDeleteContact }) => {
       ))}
     </Table>
   );
-};
+}
 
-const mapStateToProps = state => ({
-  contacts: selectors.getVisibleContacts(state),
-});
+// const mapStateToProps = state => ({
+//   contacts: selectors.getVisibleContacts(state),
+// });
 
-const mapDispatchToProps = dispatch => ({
-  onDeleteContact: id => dispatch(operations.deleteContact(id)),
-});
+// const mapDispatchToProps = dispatch => ({
+//   onDeleteContact: id => dispatch(operations.deleteContact(id)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+// export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
 
 ContactList.propTypes = {
   onDeleteContact: PropTypes.func,
-  contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }),
+  ),
 };
